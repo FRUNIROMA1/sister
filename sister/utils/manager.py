@@ -179,4 +179,4 @@ class Manager:
                     band = np.zeros(band.shape)
                 writer.write_band(band,band_num)
 
-        shutil.rmtree(rfl_tmp)
+        #shutil.rmtree(rfl_tmp)
