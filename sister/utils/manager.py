@@ -143,11 +143,13 @@ class Manager:
         apply_oe += ['--ray_temp_dir',rfl_tmp]
         apply_oe += ['--log_file','%s/%s_logfile' % (rfl_tmp,self.base_name)]
         apply_oe += ['--emulator_base',self.isofit['emulator']]
-
-        if self.rdn_cfg['radiance_factors']:
-            rad_factors = "%s/radiance_factors.txt" % rfl_tmp
+        
+        print('non applico 2 volte i coeff di correzione della radianza')
+        """
+        if self.rdn_cfg['radiatdiance_factors.txt" % rfl_tmp
             download_file(rad_factors,self.rdn_cfg['radiance_factors'])
             apply_oe += ['--rdn_factors_path',rad_factors]
+        """
         print('inizio correzione atm')
         print('apply_oe')
         apply = subprocess.Popen(apply_oe)
