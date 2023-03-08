@@ -332,7 +332,7 @@ def pairwise(iterable):
     next(b, None)
     return zip(a, b)
 
-def get_landsat_image(longitude,latitude,month,max_cloud = 5,band=5,project = True,month_window = 1):
+def get_landsat_image_reflettance(longitude,latitude,month,max_cloud = 5,band=5,project = True,month_window = 1):
     '''Given a set of coordinates and a month this function uses
     Google Earth Engine to generate a landsat scene using scenes from
     +/- 1 month of the input month
@@ -354,14 +354,14 @@ def get_landsat_image(longitude,latitude,month,max_cloud = 5,band=5,project = Tr
                                         (lon1,lat1)]))
 
     #Retrieve Landsat 8 collection and average
-    landsat8 = ee.ImageCollection("LANDSAT/LC08/C01/T1")
+    landsat8 = ee.ImageCollection("LANDSAT/LC08/C02/T1_L2") # ho cambiato in riflettanza
     landsat8_bounds = landsat8.filterBounds(bounds)
     month_min = max(month-month_window,1)
     month_max = min(month+month_window,12)
 
     landsat8_month = landsat8_bounds.filter(ee.Filter.calendarRange(month_min,month_max,'month'))
     landsat8_cloud = landsat8_month.filterMetadata('CLOUD_COVER','less_than',max_cloud).sort('CLOUDY_PIXEL_PERCENTAGE')
-    landsat_mean = landsat8_cloud.select('B%s' % band).mean()
+    landsat_mean = landsat8_cloud.select('SR_B%s' % band).mean()
     latlon = ee.Image.pixelLonLat().addBands(landsat_mean)
 
     lats = []
@@ -384,7 +384,7 @@ def get_landsat_image(longitude,latitude,month,max_cloud = 5,band=5,project = Tr
                               reducer=ee.Reducer.toList(),
                               geometry=mini_bounds,
                               scale=30)
-            values+= np.array((ee.Array(latlon_reducer.get("B%s" % band)).getInfo())).tolist()
+            values+= np.array((ee.Array(latlon_reducer.get("SR_B%s" % band)).getInfo())).tolist()
             lats += np.array((ee.Array(latlon_reducer.get("latitude")).getInfo())).tolist()
             lons+= np.array((ee.Array(latlon_reducer.get("longitude")).getInfo())).tolist()
 
