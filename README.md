@@ -36,7 +36,10 @@ and install with pip:
 ```bash
 pip install ./sister
 ```
-
+and install spyder:
+```bash
+conda install spyder
+```
 ### Examples
 
 #### PRISMA HDF to ENVI
