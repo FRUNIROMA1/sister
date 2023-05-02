@@ -17,6 +17,7 @@ To create and activate a new environment run:
 conda create -n sister python=3.8
 conda activate sister
 conda config --add channels conda-forge
+conda config --set channel_priority strict
 ```
 
 Next install gdal:
