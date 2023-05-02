@@ -15,7 +15,8 @@ We recommend installing the libary and its dependencies in a conda environment.
 To create and activate a new environment run:
 ```bash
 conda create -n sister python=3.8
-source activate sister
+conda activate sister
+conda config --add channels conda-forge
 ```
 
 Next install gdal:
