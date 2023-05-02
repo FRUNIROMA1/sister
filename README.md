@@ -29,7 +29,7 @@ conda install  numba
 
 To install the library, clone:
 ```bash
-git clone https://github.com/EnSpec/sister.git
+git clone .....
 ```
 and install with pip:
 ```bash
