@@ -20,7 +20,7 @@ source activate sister
 
 Next install gdal:
 ```bash
-conda install  gdal
+conda install  gdal 3.4.1
 ```
 
 To install the library, clone:
