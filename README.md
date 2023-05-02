@@ -21,6 +21,8 @@ source activate sister
 Next install gdal:
 ```bash
 conda install  gdal 3.4.1
+conda install  h5py 
+conda install  numba 
 ```
 
 To install the library, clone:
