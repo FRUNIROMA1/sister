@@ -22,6 +22,7 @@ conda config --add channels conda-forge
 Next install gdal:
 ```bash
 conda install gdal=3.4.1
+conda install gdal=3.6.2
 conda install h5py 
 conda install numba 
 conda install git
