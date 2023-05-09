@@ -34,7 +34,7 @@ git clone .....
 ```
 and install with pip:
 ```bash
-pip install ./sister
+pip install -e ./sister
 ```
 and install spyder:
 ```bash
