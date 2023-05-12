@@ -25,7 +25,7 @@ conda install gdal=3.6.2
 conda install h5py 
 conda install numba 
 conda install git
-conda install numpy=1.22.5 #(< 1.24.0) for the numpy float problem
+conda install numpy=1.22.4 #(< 1.24.0) for the numpy float problem
 ```
 
 To install the library, clone:
