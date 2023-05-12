@@ -14,33 +14,26 @@ We recommend installing the libary and its dependencies in a conda environment.
 
 To create and activate a new environment run:
 ```bash
-conda create -n sister python=3.8.16
-conda activate sister
-conda config --add channels conda-forge
+conda create -n sister python=3.8
+source activate sister
 ```
 
 Next install gdal:
 ```bash
-#conda install gdal=3.4.1
-conda install gdal=3.6.2
-conda install h5py 
-conda install numba 
-conda install git
-numpy version 1.23.5 #(< 1.24.0) for the numpy float problem
+conda install  gdal 3.4.1
+conda install  h5py 
+conda install  numba 
 ```
 
 To install the library, clone:
 ```bash
-git clone .....
+git clone https://github.com/EnSpec/sister.git
 ```
 and install with pip:
 ```bash
-pip install -e ./sister
+pip install ./sister
 ```
-and install spyder:
-```bash
-conda install spyder
-```
+
 ### Examples
 
 #### PRISMA HDF to ENVI

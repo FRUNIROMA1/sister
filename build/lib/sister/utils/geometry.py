@@ -131,6 +131,7 @@ def dda2utm(longitude,latitude,altitude,zn_dir =None):
 def dda2ecef(longitude,latitude,altitude):
     '''Convert longitude,latitude and altitude to Earth Centered Earth Fixed
     coordinates (x,y,x)
+
     '''
     in_crs = pyproj.Proj(proj='longlat', ellps='WGS84', datum='WGS84')
     out_crs = pyproj.Proj(proj='geocent', ellps='WGS84', datum='WGS84')
@@ -330,85 +331,6 @@ def pairwise(iterable):
     a, b = tee(iterable)
     next(b, None)
     return zip(a, b)
-def get_landsat_image(longitude,latitude,month,max_cloud = 5,band=5,project = True,month_window = 1):
-    '''Given a set of coordinates and a month this function uses
-    Google Earth Engine to generate a landsat scene using scenes from
-    +/- 1 month of the input month
-    '''
-
-    # Get extents of image, extend to allow for shifting
-    lat1 = float(np.max(latitude)) + .02
-    lat2= float(np.min(latitude)) - .02
-
-    lon1 = float(np.max(longitude)) + .02
-    lon2= float(np.min(longitude)) - .02
-
-    ee.Initialize()
-
-    bounds  = ee.Geometry.Polygon(list([(lon1,lat1),
-                                        (lon2,lat1),
-                                        (lon2,lat2),
-                                        (lon1,lat2),
-                                        (lon1,lat1)]))
-
-    #Retrieve Landsat 8 collection and average
-    landsat8 = ee.ImageCollection("LANDSAT/LC08/C01/T1")
-    landsat8_bounds = landsat8.filterBounds(bounds)
-    month_min = max(month-month_window,1)
-    month_max = min(month+month_window,12)
-
-    landsat8_month = landsat8_bounds.filter(ee.Filter.calendarRange(month_min,month_max,'month'))
-    landsat8_cloud = landsat8_month.filterMetadata('CLOUD_COVER','less_than',max_cloud).sort('CLOUDY_PIXEL_PERCENTAGE')
-    landsat_mean = landsat8_cloud.select('B%s' % band).mean()
-    latlon = ee.Image.pixelLonLat().addBands(landsat_mean)
-
-    lats = []
-    lons = []
-    values = []
-
-    #Split up area into smaller chunks to prevent exceeding max pixels
-    mini_lats = np.linspace(lat2,lat1,5)
-    mini_lons = np.linspace(lon2,lon1,5)
-
-    for mini_lat1,mini_lat2 in pairwise(mini_lats):
-        for mini_lon1,mini_lon2 in pairwise(mini_lons):
-
-            mini_bounds =  ee.Geometry.Polygon(list([(mini_lon1,mini_lat1),
-                                                       (mini_lon2,mini_lat1),
-                                                       (mini_lon2,mini_lat2),
-                                                       (mini_lon1,mini_lat2),
-                                                       (mini_lon1,mini_lat1)]))
-            latlon_reducer = latlon.reduceRegion(
-                              reducer=ee.Reducer.toList(),
-                              geometry=mini_bounds,
-                              scale=30)
-            values+= np.array((ee.Array(latlon_reducer.get("B%s" % band)).getInfo())).tolist()
-            lats += np.array((ee.Array(latlon_reducer.get("latitude")).getInfo())).tolist()
-            lons+= np.array((ee.Array(latlon_reducer.get("longitude")).getInfo())).tolist()
-
-
-    lats = np.array(lats)[:,np.newaxis]
-    lons= np.array(lons)[:,np.newaxis]
-    values= np.array(values)[:,np.newaxis]
-
-
-    if project:
-        project = Projector()
-        easting,northing,up = dda2utm(lons,lats,[0 for x in lats],zn_dir =None)
-        coords =np.concatenate([easting,northing],axis=1)
-        project.create_tree(coords,np.expand_dims(easting.flatten(),axis=1).shape)
-
-        ulx = easting.min()-100
-        uly = northing.max()+100
-        pixel_size = 30
-
-        project.query_tree(ulx,uly,pixel_size)
-
-        values_prj = project.project_band(np.expand_dims(values.flatten(),axis=1),-9999)
-        return values_prj,ulx,uly
-
-
-    return values,lons,lats
 
 def get_landsat_image_reflettance(longitude,latitude,month,max_cloud = 5,band=5,project = True,month_window = 1):
     '''Given a set of coordinates and a month this function uses
@@ -470,7 +392,7 @@ def get_landsat_image_reflettance(longitude,latitude,month,max_cloud = 5,band=5,
     lats = np.array(lats)[:,np.newaxis]
     lons= np.array(lons)[:,np.newaxis]
     values= np.array(values)[:,np.newaxis]
-    values=values*2.75e-05 - 0.2
+
 
     if project:
         project = Projector()

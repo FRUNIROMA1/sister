@@ -1,0 +1,8 @@
+Metadata-Version: 2.1
+Name: sister-sbg
+Version: 1.2.0
+Summary: SISTER: Space-based Imaging Spectroscopy and Thermal PathfindER
+Home-page: https://github.com/EnSpec/sister
+Author: Adam Chlus
+Requires-Python: >=3.6, !=3.9.*
+License-File: LICENSE.txt

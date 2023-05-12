@@ -341,7 +341,7 @@ def he5_to_envi(L2C_zip,out_dir,temp_dir,elev_dir,
         # Project independent variables
         sensor_az_prj = project.project_band(sensor_az,-9999)
         sensor_zn_prj = project.project_band(sensor_zn,-9999)
-        elevation_prj = project.project_band(elevation.astype(np.float64),-9999)
+        elevation_prj = project.project_band(elevation.astype(np.float),-9999)
 
         radiance = ht.HyTools()
         radiance.read_file(rfl_file, 'envi') #file prisma
