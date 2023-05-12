@@ -34,7 +34,7 @@ git clone https://github.com/EnSpec/sister.git
 ```
 and install with pip:
 ```bash
-pip install ./sister
+pip install -e ./sister
 ```
 
 ### Examples
