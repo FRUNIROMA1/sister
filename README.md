@@ -37,10 +37,13 @@ and install with pip:
 pip install -e ./sister
 ```
 If you are having this Error:
+```bash
 ERROR 1: ZIPDecode:Decoding error at scanline 0
 ERROR 1: TIFFReadEncodedTile() failed.
-there may be so me problem with gdal or Google Earth Engine
+```
+There may be so me problem with gdal or Google Earth Engine
 For Google Earth Engine pkease check your Earth Engine autentication.
+
 For Gdal sems t be somting wrong with the conda installation (17/09/2023):
 ```bash
  conda uninstall gdal
