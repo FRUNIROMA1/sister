@@ -69,9 +69,9 @@ three ENVI formated files:
 import os
 from sister.sensors import prismaL2C
 def main():
-	l1_zip  = '/data/prisma/PRS_L1_STD_OFFL_ 20200621003500_20200621003505_0001.zip'
-	out_dir = '/data/prisma/rad/'
-	temp_dir =  '/data/temp/'
+	l1_zip  = '/data/prisma/PRS_L2C_STD_20210426073316_20210426073320_0001.zip'
+	out_dir = '/data/prisma/rfl'
+	temp_dir =  '/data/temp'
 	elev_dir = 'https://copernicus-dem-30m.s3.amazonaws.com/'
 	
 	 prismaL2C.he5_to_envi(l1_zip,
