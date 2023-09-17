@@ -44,7 +44,7 @@ ERROR 1: TIFFReadEncodedTile() failed.
 There may be so me problem with gdal or Google Earth Engine
 For Google Earth Engine pkease check your Earth Engine autentication.
 
-For Gdal sems t be somting wrong with the conda installation (17/09/2023):
+For Gdal sems to be someting wrong with the conda installation (17/09/2023):
 ```bash
  conda uninstall gdal
  go to https://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal and dounload a gdal version compatyble with your python version
