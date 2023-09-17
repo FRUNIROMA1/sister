@@ -67,7 +67,7 @@ three ENVI formated files:
 ```python
 
 import os
-from sister.sensors import prisma
+from sister.sensors import prismaL2C
 def main():
 	l1_zip  = '/data/prisma/PRS_L1_STD_OFFL_ 20200621003500_20200621003505_0001.zip'
 	out_dir = '/data/prisma/rad/'
@@ -78,8 +78,7 @@ def main():
 				out_dir,
 				temp_dir,
 				elev_dir,
-				shift = './data/prisma/PRISMA_Mali1_wavelength_shift_surface_smooth.npz',
-				rad_coeff = './data/prisma/PRS_Mali1_radcoeff_surface.npz',
+				
 				match= True,
 				proj = True)
 if __name__ == '__main__':
