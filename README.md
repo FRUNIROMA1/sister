@@ -68,19 +68,20 @@ three ENVI formated files:
 
 import os
 from sister.sensors import prisma
-
-l1_zip  = '/data/prisma/PRS_L1_STD_OFFL_ 20200621003500_20200621003505_0001.zip'
-out_dir = '/data/prisma/rad/'
-temp_dir =  '/data/temp/'
-elev_dir = 'https://copernicus-dem-30m.s3.amazonaws.com/'
-
-prisma.he5_to_envi(l1_zip,
-			out_dir,
-			temp_dir,
-			elev_dir,
-			shift = './data/prisma/PRISMA_Mali1_wavelength_shift_surface_smooth.npz',
-			rad_coeff = './data/prisma/PRS_Mali1_radcoeff_surface.npz',
-			match= True,
-			proj = True)
-
+def main():
+	l1_zip  = '/data/prisma/PRS_L1_STD_OFFL_ 20200621003500_20200621003505_0001.zip'
+	out_dir = '/data/prisma/rad/'
+	temp_dir =  '/data/temp/'
+	elev_dir = 'https://copernicus-dem-30m.s3.amazonaws.com/'
+	
+	prisma.he5_to_envi(l1_zip,
+				out_dir,
+				temp_dir,
+				elev_dir,
+				shift = './data/prisma/PRISMA_Mali1_wavelength_shift_surface_smooth.npz',
+				rad_coeff = './data/prisma/PRS_Mali1_radcoeff_surface.npz',
+				match= True,
+				proj = True)
+if __name__ == '__main__':
+    main()
 ```
