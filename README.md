@@ -74,7 +74,7 @@ def main():
 	temp_dir =  '/data/temp/'
 	elev_dir = 'https://copernicus-dem-30m.s3.amazonaws.com/'
 	
-	prisma.he5_to_envi(l1_zip,
+	 prismaL2C.he5_to_envi(l1_zip,
 				out_dir,
 				temp_dir,
 				elev_dir,
