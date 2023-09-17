@@ -42,7 +42,7 @@ ERROR 1: ZIPDecode:Decoding error at scanline 0
 ERROR 1: TIFFReadEncodedTile() failed.
 ```
 There may be some problem with gdal or Google Earth Engine
-For Google Earth Engine pkease check your Earth Engine autentication.
+For Google Earth Engine pkease check your Earth Engine authentication.
 
 For gdal sems to be something wrong with the conda installation (17/09/2023):
 ```bash
