@@ -73,12 +73,10 @@ def main():
 	out_dir = '/data/prisma/rfl'
 	temp_dir =  '/data/temp'
 	elev_dir = 'https://copernicus-dem-30m.s3.amazonaws.com/'
-	
-	 prismaL2C.he5_to_envi(l1_zip,
+	prismaL2C.he5_to_envi(l1_zip,
 				out_dir,
 				temp_dir,
 				elev_dir,
-				
 				match= True,
 				proj = True)
 if __name__ == '__main__':
